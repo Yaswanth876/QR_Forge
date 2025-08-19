@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Forge</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>QR Forge</h1>
+
+    {% if error %}
+      <p class="error-message">{{ error }}</p>
+    {% endif %}
+
+    <!-- Form for input -->
+    <form method="POST">
+      <input type="text" name="data" placeholder="Enter text or URL" required>
+      <button type="submit" name="generate">Generate</button>
+    </form>
+
+    <!-- Show QR code if generated -->
+    {% if qr_code %}
+      <h3>Generated QR Code:</h3>
+      <img src="{{ qr_code }}" alt="QR Code" class="qr-code-image">
+      <br>
+      <a href="/download"><button>Download</button></a>
+    {% endif %}
+  </div>
+</body>
+</html>

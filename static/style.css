@@ -1,0 +1,385 @@
+/* 
+  :root is the top-level selector; we declare CSS variables here for easy theming.
+*/
+:root {
+  /* A fluid spacing scale you can reuse across components. */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+
+  /* Max width of the container for nice readable lines. */
+  --content-max: 480px;
+
+  /* Typography: a system font stack for good defaults. */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+               Arial, "Noto Sans", "Liberation Sans", sans-serif;
+
+  /* Light theme colors (black and white). */
+  --bg: #ffffff;
+  --fg: #000000;
+  --muted: #666666;
+  --primary: #000000;
+  --card: #ffffff;
+  --ring: #000000;
+  --border: #e0e0e0;
+  --error: #000000;
+  --input-bg: #ffffff;
+  --input-border: #cccccc;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Respect OS-level dark mode automatically. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --fg: #ffffff;
+    --muted: #999999;
+    --primary: #ffffff;
+    --card: #1d1d1d;
+    --ring: #ffffff;
+    --border: #333333;
+    --error: #ffffff;
+    --input-bg: #111111;
+    --input-border: #444444;
+    --shadow: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Reset margins and set base font across page. */
+* { 
+  box-sizing: border-box; 
+}
+
+html, body { 
+  height: 100%; 
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--fg);
+  background: var(--bg);
+  line-height: 1.6;
+  display: grid;
+  place-items: center;
+  padding: var(--space-8);
+  min-height: 100vh;
+}
+
+/* The main container card. */
+.container {
+  width: 100%;
+  max-width: var(--content-max);
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: var(--space-8);
+  box-shadow: 0 10px 30px var(--shadow);
+  text-align: center;
+}
+
+/* Header styling */
+header {
+  margin-bottom: var(--space-8);
+}
+
+/* Title styling */
+h1 {
+  margin: 0 0 var(--space-2) 0;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--fg);
+}
+
+.logo {
+  font-size: 1.2em;
+  margin-right: var(--space-2);
+}
+
+.subtitle {
+  margin: var(--space-2) 0 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+h2 {
+  margin: var(--space-6) 0 var(--space-4) 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+/* Section styling */
+.generator-section {
+  margin-bottom: var(--space-8);
+}
+
+.result-section {
+  margin-bottom: var(--space-6);
+}
+
+/* Form styling */
+form {
+  margin-bottom: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+/* Input group styling */
+.input-group {
+  margin-bottom: var(--space-4);
+  width: 100%;
+}
+
+.input-help {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--muted);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+/* Visually hidden label for accessibility */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Input styling */
+input[type="text"] {
+  width: 100%;
+  max-width: 300px;
+  padding: var(--space-3) var(--space-4);
+  border: 2px solid var(--input-border);
+  border-radius: 10px;
+  background: var(--input-bg);
+  color: var(--fg);
+  font: inherit;
+  font-size: 1rem;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  input[type="text"]:focus {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+  }
+}
+
+input[type="text"]::placeholder {
+  color: var(--muted);
+}
+
+/* Button styling */
+button {
+  appearance: none;
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  padding: var(--space-3) var(--space-6);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--primary);
+  color: var(--bg);
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+  min-width: 120px;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px var(--shadow);
+  background: var(--fg);
+}
+
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--shadow);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Enhanced button styling */
+.generate-btn {
+  background: var(--primary);
+  color: var(--bg);
+  font-size: 1.1rem;
+  padding: var(--space-4) var(--space-8);
+  border: 2px solid var(--primary);
+}
+
+.generate-btn:hover {
+  background: var(--bg);
+  color: var(--primary);
+}
+
+.btn-icon {
+  margin-right: var(--space-2);
+}
+
+/* QR display area */
+.qr-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.qr-actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* QR Code image styling */
+.qr-code-image {
+  margin: var(--space-4) 0;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  max-width: 200px;
+  height: auto;
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+/* Download and copy buttons */
+.download-btn,
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  padding: var(--space-3) var(--space-6);
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 120ms ease;
+  border: 2px solid var(--primary);
+}
+
+.download-btn {
+  background: var(--primary);
+  color: var(--bg);
+}
+
+.download-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px var(--shadow);
+  background: var(--bg);
+  color: var(--primary);
+}
+
+.copy-btn {
+  background: var(--bg);
+  color: var(--primary);
+  border: 2px solid var(--border);
+}
+
+.copy-btn:hover {
+  background: var(--primary);
+  color: var(--bg);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+/* Error message styling */
+.error-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  color: var(--error);
+  margin: var(--space-4) 0;
+  padding: var(--space-3) var(--space-4);
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+@media (prefers-color-scheme: dark) {
+  .error-message {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.error-icon {
+  font-size: 1.1em;
+}
+
+/* Footer styling */
+.app-footer {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 2px solid var(--border);
+  text-align: center;
+}
+
+.app-footer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+/* Download link styling */
+a {
+  text-decoration: none;
+  margin-top: var(--space-4);
+  display: inline-block;
+}
+
+/* Loading state */
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Enhanced responsive design */
+@media (max-width: 480px) {
+  .container {
+    margin: var(--space-4);
+    padding: var(--space-6);
+  }
+  
+  input[type="text"] {
+    max-width: 100%;
+  }
+  
+  .qr-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .download-btn,
+  .copy-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  .generate-btn {
+    width: 100%;
+  }
+}
